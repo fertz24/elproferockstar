@@ -1,6 +1,8 @@
 # cinegod
 
 A new Flutter project.
+![Captura de registro de usuario en TMDB](31deOctubre2025APPSMOVILES.png)
+
 
 ## Getting Started
 
