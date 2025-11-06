@@ -1,8 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Environment {
   
   //conexion para el servicio a utilizar
   //variables de entorno
-  static String key = "key";
-  static String baseUrl = "baseUrl";
+  static String key = dotenv.env['TOKEN_SECRET_TMDB'] ?? 'your_api_key';
+  static String theBaseUrl = 
+      dotenv.env['API_TMDB'] ?? 'https://api.themoviedb.org/3';
 }

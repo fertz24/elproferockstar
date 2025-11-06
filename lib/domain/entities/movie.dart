@@ -30,4 +30,6 @@ class Movie {
     required this.voteAverage,
     required this.voteCount
   });
+
+  
 }
