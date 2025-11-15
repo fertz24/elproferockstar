@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cinegod/presentation/providers/movies/movies_providers.dart';
+
+  class HomeView extends ConsumerStatefulWidget{
+
+  static const String routeName = 'home_screen';
+  const HomeView({super.key});
+
+  @override
+  ConsumerState<HomeView> createState() => _HomeViewState();
+
+  }
+
+  class _HomeViewState extends ConsumerState<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider); //se cargan los valores que va a recibir, la lista de movies
+      if (nowPlayingMovies.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    return ListView.builder(
+      itemBuilder: (_, index) {
+        final movie = nowPlayingMovies[index];
+        return ListTile(title: Text(movie.title));
+      },
+      itemCount: nowPlayingMovies.length,
+    );
+  }
+}
