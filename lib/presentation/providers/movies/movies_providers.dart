@@ -8,6 +8,24 @@ final nowPlayingMoviesProvider = //funcion para notificar
       return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
     });
 
+final popularMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) { 
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
+final upcomingMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) { 
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
+final topRatedMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) { 
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
 typedef MovieCallBack = Future<List<Movie>> Function({int page}); //typefer es el nombre de un conjunto de interfaz para una funcion
 
 class MoviesNotifier extends StateNotifier<List<Movie>> { //Se indica el mismo valor que se va a devolver
