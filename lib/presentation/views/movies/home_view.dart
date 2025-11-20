@@ -1,3 +1,4 @@
+import 'package:cinegod/presentation/widgets/shared/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinegod/presentation/providers/movies/movies_providers.dart';
@@ -9,7 +10,6 @@ import 'package:cinegod/presentation/providers/movies/movies_providers.dart';
 
   @override
   ConsumerState<HomeView> createState() => _HomeViewState();
-
   }
 
   class _HomeViewState extends ConsumerState<HomeView> {
@@ -25,12 +25,22 @@ import 'package:cinegod/presentation/providers/movies/movies_providers.dart';
       if (nowPlayingMovies.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
-    return ListView.builder(
-      itemBuilder: (_, index) {
-        final movie = nowPlayingMovies[index];
-        return ListTile(title: Text(movie.title));
-      },
-      itemCount: nowPlayingMovies.length,
-    );
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(title: CustomAppBar()),
+        ), 
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            final movie = nowPlayingMovies[index];
+            return ListTile(
+              title: Text(movie.title),
+              subtitle: Text(movie.overview),
+            );
+          }, childCount: nowPlayingMovies.length),
+        )
+      ],
+    ); 
   }
 }
